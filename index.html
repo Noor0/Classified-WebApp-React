@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Classified App</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.min.js"></script>
+	<script src="../react-15.3.1/build/react.js"></script>
+    <script src="../react-15.3.1/build/react-dom.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div class="row">
+	<div id="header"></div>
+</div>
+<div class="row">	
+	<div id="jum"></div>
+</div>
+<div class="container">
+	<div id="categories" class="row"></div>
+</div>
+
+
+
+<script type="text/babel">
+
+var mod= document.createElement("div");
+mod.id="theMod";
+mod.className="myModal";
+document.body.appendChild(mod);
+
+var Logo=React.createClass({
+		getDefaultProps:function(){
+			return{
+				link:"#",
+				name:"Classified App"
+			};
+		},
+
+		render:function(){
+			return(<a className="navbar-brand" href={this.props.link}>{this.props.name}</a>)
+		}
+});
+
+var Button=React.createClass({
+	render:function(){
+		return(<button onClick={this.props.show} className="btn btn-default navbar-btn">SignUp/SignIn</button>);
+	}
+});
+
+var Header = React.createClass({
+	render:function(){
+		//console.log(sessionStorage.id);
+		//console.log(sessionStorage.username);
+		var logo=<Logo />;
+		var button=<Button show={this.show} />;
+
+		if((sessionStorage.id != undefined && sessionStorage.id != "") || (sessionStorage.username != "" && sessionStorage.username != undefined)){
+			logo=<Logo link="home.html" name={sessionStorage.username} />;
+			button="";
+		}
+
+		return(
+			<nav className="navbar navbar-inverse navbar-fixed-top ss">
+			  <div className="container-fluid">
+			  <div className="row">
+			  <div className="col-sm-3">
+			    <div className="navbar-header">
+			      {logo}
+			    </div>
+				</div>
+				<div className="col-sm-4 col-sm-offset-3">
+			    <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			      <form className="navbar-form navbar-left">
+			        <div className="form-group">
+			          <input type="text" className="form-control" placeholder="Search" />
+			        </div>
+			        <button type="submit" className="btn btn-default">Search</button>
+			      </form>
+			    </div>
+			    </div>
+			    <div className="col-sm-1 ">{button}</div>
+			    </div>
+			  </div>
+			</nav>
+		);
+	},
+	show:function(){
+		document.getElementById("theMod").style.display="block";
+		document.getElementById("theMod").style.position="fixed";
+	}	
+});
+
+var Jumbo = React.createClass({
+	render:function(){
+		return(<div id="jumbo" className="jumbotron">
+		  <h1>The Classified App</h1>
+		  <p>Pakistan's biggest online buying and selling portal</p>
+		  <p><a onClick={this.modalPop} className="btn btn-default btn-lg" href="#" role="button">Post an Ad</a></p>
+		</div>);
+	},
+	modalPop:function(){
+		mod.style.display="block";
+		mod.style.position="fixed";
+	}
+});
+
+var Thumb = React.createClass({
+	
+	getDefaultProps:function(){
+		return{
+			link:"#",
+			text:"Something",
+			locaTo:"category.html",
+			opCode:0
+		};
+	},
+
+	render:function(){
+		return(
+			<div className="thumb col-lg-3 col-md-3 col-sm-6">
+				<img src={this.props.link} className="img-responsive"/>
+				<button onClick={this.gogo.bind(this,this.props)} className="btn btn-link">{this.props.text}</button>
+			</div>
+		);
+	},
+
+	gogo:function(s){
+		if(Storage != "undefined")
+			sessionStorage.category=s.opCode;
+		window.location=s.locaTo;
+	}
+});
+
+var ThumbCreator=React.createClass({
+	render:function(){
+		var contents=[
+		{"text":"Furniture","link":"http://cdn.onlinewebfonts.com/svg/img_216145.svg","locaTo":"#"},
+		
+		{"text":"Mobiles","link":"https://d30y9cdsu7xlg0.cloudfront.net/png/91111-200.png","locaTo":"#"},
+		
+		{"text":"Appliances","link":"http://www.iconsfind.com/wp-content/uploads/2016/03/20160307_56dcf5ea4842f.png","locaTo":"#"},
+
+		{"text":"Cars","link":"https://s-media-cache-ak0.pinimg.com/564x/7a/67/0b/7a670b499a197a72b8bc4bc481df4a35.jpg","locaTo":"#"},
+
+		{"text":"Bikes","link":"https://d30y9cdsu7xlg0.cloudfront.net/png/24598-200.png","locaTo":"#"},
+
+		{"text":"Pet","link":"http://image.flaticon.com/icons/svg/29/29662.svg","locaTo":"#"},
+
+		{"text":"Books and Hobbies","link":"http://icons.veryicon.com/ico/System/Icons8%20Metro%20Style/Printed%20Matter%20Book.ico","locaTo":"#"},
+
+		{"text":"Fashion","link":"http://image.flaticon.com/icons/svg/25/25285.svg","locaTo":"#"},
+
+		{"text":"Properties","link":"http://www.konsul10.com/images/residenceoffice.png","locaTo":"#"},
+
+		{"text":"Jobs","link":"http://www.delta-cad.com/wp-content/uploads/2015/12/6.png","locaTo":"#"}
+
+		];
+
+		var toRender=[];
+
+		for(var i = 0; i < contents.length; i++){
+			toRender.push(<Thumb text={contents[i].text} link={contents[i].link} opCode={i+1}/>);
+		}
+		var st={textAlign:'center'};
+		return(<div><h1 className="text-info" style={st}>Check classifieds sorted by category</h1>{toRender}</div>);
+	}		
+});
+
+var SignForm=React.createClass({
+	
+	render:function(){
+	return(
+		<div><br /><br /><br /><br />
+			<div className="col-sm-1 col-sm-offset-11"><span onClick={this.drop} className="lab glyphicon glyphicon-remove"></span></div>
+			<div className="col-sm-6 col-md-3 col-md-offset-3">
+				<h2 className="lab">SignIn</h2>
+				<form action="signin.php" method="POST">
+				  <div className="form-group">
+				    <label className="lab" htmlFor="email">Email address:</label>
+				    <input type="email" className="form-control" name="email" id="email" />
+				  </div>
+				  <div className="form-group">
+				    <label className="lab" htmlFor="pwd">Password:</label>
+				    <input type="password" className="form-control" name="password" id="pwd" />
+				  </div>
+				  <a className="btn btn-default" onClick={this.signIn}>Sign In</a>
+				</form>
+			</div>
+			<div className="col-sm-6 col-md-3">
+				<h2 className="lab">SignUp</h2>
+				<form action="signUp.php" method="POST">
+					<div className="row">
+		                <div className="col-xs-6 col-md-6">
+		               		<div className="form-group">
+			                	<label className="lab" htmlFor="fname">First Name:</label>
+			                    <input className="form-control" name="firstname" id="fName" type="text"
+		                        required/>
+	                        </div>
+		                </div>
+		                <div className="col-xs-6 col-md-6">
+		                	<div className="form-group">
+			                	<label className="lab" htmlFor="lName">Last Name:</label>
+			                    <input className="form-control" name="lastname" id="lName" type="text" required />
+		                    </div>
+		                </div>
+		            </div>
+		            <div className="row">
+		                <div className="col-xs-6 col-md-6">
+						  <div className="form-group">
+						    <label className="lab" htmlFor="email">Email address:</label>
+						    <input type="email" className="form-control" name="email" id="emailS" required/>
+						  </div>
+					  	</div>
+					  	<div className="col-xs-6 col-md-6">
+						  <div className="form-group">
+						    <label className="lab" htmlFor="pwd">Password:</label>
+						    <input type="password" className="form-control" name="password" id="pwdS" required/>
+						  </div>
+					  	</div>
+				  	</div>
+				  <a className="btn btn-default" onClick={this.signUp}>Sign Up</a>
+				</form>
+			</div>
+		</div>
+	);
+	},
+
+	signUp:function(){	
+		var fname = document.getElementById("fName").value;
+		var lname = document.getElementById("lName").value;
+		var email = document.getElementById("emailS").value;
+		var pwdS = document.getElementById("pwdS").value;
+
+		var req = new XMLHttpRequest();
+		req.open("POST","signUp.php?",true);
+		req.onload=function(){
+			console.log(req.responseText);
+			if(req.responseText == "1")
+				alert("problem with email");
+			if(req.responseText == "2")
+				alert("there should be no spaces in password and should be 5 characters long");
+			if(req.responseText == "3" || req.responseText == "4")
+				alert("no digits in first or last name");
+			if(req.responseText == "5")
+				alert("created!");
+		}
+		req.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+		req.send("email="+email+"&pwd="+pwdS+"&fname="+fname+"&lname="+lname);
+	},
+
+	signIn:function(){
+		var email=document.getElementById("email").value;
+		var pwd=document.getElementById("pwd").value;
+		var req = new XMLHttpRequest();
+		req.open("POST","signin.php?",true);
+		req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		req.send("email="+email+"&pwd="+pwd);
+		req.onload=function(){
+			console.log(req.responseText);
+			if(req.responseText === "1")
+				alert("wrong email");
+			else if(req.responseText === "2")
+				alert("email not found");
+			else if(req.responseText === "4")
+				alert("wrong password");
+			else{
+				var info = JSON.parse(req.responseText);
+				sessionStorage.username=info.name;
+				sessionStorage.id=info.id;
+				window.location="home.html";
+			}
+		}
+	},
+
+	drop:function(){
+		mod.style.display="none";
+	}
+});
+
+var Modal=React.createClass({
+	render:function(){
+		return(<div className=" col-sm-12 col-lg-12 col-md-12"><SignForm /></div>);
+	}
+});
+
+ReactDOM.render(<Header />,document.getElementById("header"));
+ReactDOM.render(<Jumbo />,document.getElementById("jum"));
+ReactDOM.render(<ThumbCreator />,document.getElementById("categories"));
+ReactDOM.render(<Modal />,document.getElementById("theMod"));
+
+</script>
+</body>
+</html>

@@ -13,7 +13,7 @@ if ($_POST) {
 							if(preg_match("/[\D]*/",$_POST['city'])){
 								if($_FILES['image']['type']=="image/jpeg" || $_FILES['image']['type']=="image/png"){
 									if(preg_match("/[\d]*/",$_POST['price'])){
-										$con=new mysqli("127.0.0.1","root","","classified");
+										$con=new mysqli("185.27.134.10","basep_16604240","h45vcny2","basep_16604240_classified");
 										if ($con) {
 											$stm=$con->prepare("INSERT INTO post VALUES(?,?,?,?,?,?,?,?,?,?)");
 											$post_id=null;

@@ -9,7 +9,7 @@ if($_POST){
 	if($_SESSION['userId']==$_POST['Theid']){
 	if (isset($_POST['Theid'])) {
 		if(preg_match("/[\d]*/",$_POST['Theid'])){
-			$con = new mysqli("127.0.0.1","root","","classified");
+			$con = new mysqli("185.27.134.10","basep_16604240","h45vcny2","basep_16604240_classified");
 			if($con){
 				$res = $con->query("SELECT * FROM post WHERE user_id=".$_POST['Theid']." ORDER BY post_id DESC");
 				if($res->num_rows > 0){

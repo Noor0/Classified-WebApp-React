@@ -1,5 +1,5 @@
 <?php 
-	$db=new mysqli("127.0.0.1","root","","classified");
+	$db=new mysqli("185.27.134.10","basep_16604240","h45vcny2","basep_16604240_classified");
 	// $stmt=db->prepare("INSERT INTO user VALUES(?,?,?,?)");
 	// $pwStmt=db->prepare("INSERT INTO user VALUES(?,?)");
 	$row=null;

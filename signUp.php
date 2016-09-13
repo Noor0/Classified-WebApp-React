@@ -27,7 +27,7 @@ try{
 		}else echo "4";
 
 		if($c==4){
-			$con=new mysqli("127.0.0.1","root","","classified");
+			$con=new mysqli("185.27.134.10","basep_16604240","h45vcny2","basep_16604240_classified");
 			if($con){
 				$stmt=$con->prepare("INSERT INTO user VALUES(?,?,?,?)");
 				$pwdStmt=$con->prepare("INSERT INTO password VALUES(?,?)");

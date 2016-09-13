@@ -16,6 +16,7 @@
 </div>
 <br/><br/><br/>
 
+<div id="ads3"></div>
 <div id="ads"></div>
 <div id="ads1"></div>
 <div id="ads2"></div>
@@ -136,40 +137,7 @@
 			};
 			request.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 			request.send("category="+sessionStorage.category);
-			var cat="ss";
-			switch(sessionStorage.category){
-				case "1":
-					cat="Furniture Ads";
-					break;
-				case "2":
-					cat="Mobile Ads";
-					break;
-				case "3":
-					cat="Appliances Ads";
-					break;
-				case "4":
-					cat="Car Ads";
-					break;
-				case "5":
-					cat="Bikes Ads";
-					break;
-				case "6":
-					cat="Pet Ads";
-					break;
-				case "7":
-					cat="Hobbies Ads";
-					break;
-				case "8":
-					cat="Fashion Ads";
-					break;
-				case "9":
-					cat="Property Ads";
-					break;
-				case "10":
-					cat="Jobs Ads";
-					break;
-			}
-			var st={textAlign:'center'};
+			
 
 			return(
 				<div>
@@ -298,8 +266,8 @@
 
 	ReactDOM.render(<Header />,document.getElementById("header"));
 	ReactDOM.render(<Ad title="Classified 1" price="200" name="Noor ul Haq" number="1234567" email="foo@bar.com" desc="Description is not required" city="Karachi" />,document.getElementById("ads"));
-	ReactDOM.render(<Ad title="Classified 1" price="200" name="Noor ul Haq" number="1234567" email="foo@bar.com" desc="Description is not required" link="https://www.google.com/mobile/play/images/p1.jpg" city="Karachi" />,document.getElementById("ads1"));
-	ReactDOM.render(<Ad title="Classified 1" price="200" name="Noor ul Haq" number="1234567" email="foo@bar.com" desc="Description is not required" link="http://i3.ypcdn.com/blob/2edf51f656a009a177211ac175377d0890dd70f1" city="Karachi" />,document.getElementById("ads2"));
+	ReactDOM.render(<Ad title="Classified 2" price="200" name="Noor ul Haq" number="1234567" email="foo@bar.com" desc="Description is not required" link="https://www.google.com/mobile/play/images/p1.jpg" city="Karachi" />,document.getElementById("ads1"));
+	ReactDOM.render(<Ad title="Classified 3" price="200" name="Noor ul Haq" number="1234567" email="foo@bar.com" desc="Description is not required" link="http://i3.ypcdn.com/blob/2edf51f656a009a177211ac175377d0890dd70f1" city="Karachi" />,document.getElementById("ads2"));
 	ReactDOM.render(<Modal />,document.getElementById("theMod"));
 </script>
 </body>

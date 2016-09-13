@@ -15,7 +15,11 @@
 	<div id="header"></div>
 </div>
 <br/><br/><br/>
+
 <div id="ads"></div>
+<div id="ads1"></div>
+<div id="ads2"></div>
+
 <div id="theMod" class="myModal"></div>
 <script type="text/babel">
 	var Logo=React.createClass({
@@ -127,7 +131,7 @@
 				if(jso[i].image_loc != "")
 					adsArray.push(<Ad title={jso[i].title} link={jso[i].image_loc} price={jso[i].price} name={jso[i].name} number={jso[i].number} email={jso[i].email} desc={jso[i].description} city={jso[i].city} price={jso[i].price}/>);
 				else
-					adsArray.push(<Ad title={jso[i].title} price={jso[i].price} name={jso[i].name} number={jso[i].number} email={jso[i].email} desc={jso[i].description} city={jso[i].city} price={jso[i].price}/>);
+					adsArray.push(<Ad title={jso[i].title} price={jso[i].price} name={jso[i].name} number={jso[i].number} email={jso[i].email} desc={jso[i].description} city={jso[i].city} />);
 				}
 			};
 			request.setRequestHeader("Content-type","application/x-www-form-urlencoded");
@@ -293,7 +297,9 @@
 	});
 
 	ReactDOM.render(<Header />,document.getElementById("header"));
-	ReactDOM.render(<Ads />,document.getElementById("ads"));
+	ReactDOM.render(<Ad title="Classified 1" price="200" name="Noor ul Haq" number="1234567" email="foo@bar.com" desc="Description is not required" city="Karachi" />,document.getElementById("ads"));
+	ReactDOM.render(<Ad title="Classified 1" price="200" name="Noor ul Haq" number="1234567" email="foo@bar.com" desc="Description is not required" link="https://www.google.com/mobile/play/images/p1.jpg" city="Karachi" />,document.getElementById("ads1"));
+	ReactDOM.render(<Ad title="Classified 1" price="200" name="Noor ul Haq" number="1234567" email="foo@bar.com" desc="Description is not required" link="http://i3.ypcdn.com/blob/2edf51f656a009a177211ac175377d0890dd70f1" city="Karachi" />,document.getElementById("ads2"));
 	ReactDOM.render(<Modal />,document.getElementById("theMod"));
 </script>
 </body>

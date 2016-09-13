@@ -152,7 +152,7 @@
 		poster:function(){
 			alert(sessionStorage.username+" "+sessionStorage.id);
 			var req = new XMLHttpRequest();
-			req.open("POST","upload.php",true);
+			req.open("POST","http://template.base.pk/upload.php",true);
 			req.onload=function(){
 				console.log(req.responseText);
 			};
@@ -195,7 +195,7 @@
 
 		logout:function(){
 			var req = new XMLHttpRequest();
-			req.open("GET","logout.php",true);
+			req.open("GET","http://template.base.pk/logout.php",true);
 			req.onload=function(){
 				sessionStorage.id="";
 				sessionStorage.username="";
@@ -246,7 +246,7 @@
 		render:function(){
 			var adsArray=[];
 			var request = new XMLHttpRequest();
-			request.open("POST","ads.php?",false);
+			request.open("POST","http://template.base.pk/ads.php?",false);
 			request.onload=function(){
 				//console.log(request.responseText);
 				if(request.responseText == "NO" || request.responseText == "")

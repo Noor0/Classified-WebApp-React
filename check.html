@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Classified App</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.min.js"></script>
+	<script src="../react-15.3.1/build/react.js"></script>
+    <script src="../react-15.3.1/build/react-dom.js"></script>
+</head>
+<body>
+
+<div id="go"></div>
+
+<script type="text/babel">
+
+	var Rere = React.createClass({
+
+		getInitialState:function(){
+			return{click:0};
+		},
+
+		getDefaultProps:function(){
+			return{
+				titleE:"default",
+				link:"https://lh4.googleusercontent.com/-v0soe-ievYE/AAAAAAAAAAI/AAAAAAADin4/sRU8K5S1huE/photo.jpg"
+			};
+		},
+
+		propTypes:{
+			titleE:React.PropTypes.string
+		},
+
+		render:function(){
+			return(<div><img onClick={this.cck} src={this.props.link} title={this.props.titleE}/><p>{this.state.click}</p></div>);
+		},
+
+		cck:function(){
+			this.setState({
+				click:this.state.click+1
+			});
+			window.location="google.com";
+		}
+
+	});
+
+	ReactDOM.render(<Rere link="https://facebook.github.io/react/img/logo.svg"/> , document.getElementById('go'));
+	var div = document.createElement("div");
+	div.id="ss";
+	document.getElementById('go').appendChild(div);
+	ReactDOM.render(<Rere link="https://www.gstatic.com/images/branding/googlelogo/2x/googlelogo_color_284x96dp.png"/> , div);
+</script>
+</body>
+</html>

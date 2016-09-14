@@ -28,7 +28,10 @@
 									break;
 							}
 
-							$send.="{\"user_id\":".$row['user_id'].",\"post_id\":".$row['post_id'].",\"title\":\"".$row['title']."\",\"description\":\"".$row['description']."\",\"image_loc\":\"".$row['image_loc']."\",\"city\":\"".$ccc."\",\"number\":\"".$row['number']."\",\"email\":\"".$row['email']."\",\"price\":".$row['price'].",\"name\":".$_SESSION['name']."}";
+							$ss=$con->query("SELECT * FROM user WHERE id=".$row['user_id']);
+							$vv=$ss->fetch_array(MYSQLI_ASSOC);
+							$nana=$vv['fname']." ".$vv['lname'];
+							$send.="{\"user_id\":".$row['user_id'].",\"post_id\":".$row['post_id'].",\"title\":\"".$row['title']."\",\"description\":\"".$row['description']."\",\"image_loc\":\"".$row['image_loc']."\",\"city\":\"".$ccc."\",\"number\":\"".$row['number']."\",\"email\":\"".$row['email']."\",\"price\":".$row['price'].",\"name\":\"".$nana."\"}";
 
 							if($i!=$res->num_rows-1)
 								$send.=",";

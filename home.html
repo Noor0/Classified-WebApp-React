@@ -6,11 +6,10 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.1/react.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.1/react-dom.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="dropzone.js"></script>
-    <link rel="stylesheet" type="text/css" href="dropzone.css">
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="styleo.css">
 </head>
 <body>
 
@@ -22,7 +21,7 @@
 	</div>
 	<br/><br/>
 	<div class="container">
-		<div id="myAd"></div>
+		<div id="thethe"></div>
 	</div>
 </div>
 <div class="myModal" id="theMod"></div>
@@ -152,7 +151,7 @@
 		poster:function(){
 			alert(sessionStorage.username+" "+sessionStorage.id);
 			var req = new XMLHttpRequest();
-			req.open("POST","upload.php",true);
+			req.open("POST","upload.php?",true);
 			req.onload=function(){
 				console.log(req.responseText);
 			};
@@ -244,27 +243,27 @@
 
 	var Ads = React.createClass({
 		render:function(){
-			var adsArray=[];
+			var kut=[];
 			var request = new XMLHttpRequest();
-			request.open("POST","ads.php?",false);
+			request.open("POST","loader.php",false);
 			request.onload=function(){
-				//console.log(request.responseText);
-				if(request.responseText == "NO" || request.responseText == "")
+				console.log(request.responseText);
+				if(sessionStorage.id == undefined || sessionStorage.id == "")
 					window.location="index.html";
 				var jso = JSON.parse(request.responseText);
 				for(var i = 0 ; i < jso.length ;i++){
 				if(jso[i].image_loc!="")
-					adsArray.push(<Ad title={jso[i].title} link={jso[i].image_loc} price={jso[i].price} name={jso[i].name} number={jso[i].number} email={jso[i].email} desc={jso[i].description} city={jso[i].city} price={jso[i].price}/>);
+					kut.push(<Ad title={jso[i].title} link={jso[i].image_loc} price={jso[i].price} name={jso[i].name} number={jso[i].number} email={jso[i].email} desc={jso[i].description} city={jso[i].city} price={jso[i].price} />);
 				else
-					adsArray.push(<Ad title={jso[i].title} price={jso[i].price} name={jso[i].name} number={jso[i].number} email={jso[i].email} desc={jso[i].description} city={jso[i].city} price={jso[i].price}/>);
+					kut.push(<Ad title={jso[i].title} price={jso[i].price} name={jso[i].name} number={jso[i].number} email={jso[i].email} desc={jso[i].description} city={jso[i].city} price={jso[i].price} />);
 				}
 			};
 			request.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 			request.send("Theid="+sessionStorage.id);
 			return(
-				<div>
+				<div className="row">
 					<h2 className="text-info" style={st}>Your Ads</h2>
-					<div className="row">{adsArray}</div>
+					<div className="row">{kut}</div>
 				</div>
 				);
 		}
@@ -273,7 +272,7 @@
 	ReactDOM.render(<Header /> , document.getElementById("header"));
 	ReactDOM.render(<Modal /> , document.getElementById("theMod"));
 	ReactDOM.render(<Action /> , document.getElementById("action"));
-	ReactDOM.render(<Ads /> , document.getElementById("myAd"));
+	ReactDOM.render(<Ads /> , document.getElementById("thethe"));
 
 </script>
 

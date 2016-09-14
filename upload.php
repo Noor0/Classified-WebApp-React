@@ -1,9 +1,8 @@
 <?php
 session_start();
 if(isset($_SESSION['userId']) && isset($_POST['poster']))
-if ($_POST['poster'] === $_SESSION['userId'])
+if ($_POST['poster'] == $_SESSION['userId'])
 if ($_POST) {
-	print_r($_POST);
 	if (isset($_POST['number'])) {
 		if(preg_match("/[\d]*/",$_POST['number'])){
 			if (isset($_POST['email'])) {

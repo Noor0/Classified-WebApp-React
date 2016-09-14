@@ -6,21 +6,16 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.1/react.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.1/react-dom.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="styleo.css">
 </head>
 <body>
 <div class="row">
 	<div id="header"></div>
 </div>
 <br/><br/><br/>
-
-<div id="ads3"></div>
 <div id="ads"></div>
-<div id="ads1"></div>
-<div id="ads2"></div>
-
 <div id="theMod" class="myModal"></div>
 <script type="text/babel">
 	var Logo=React.createClass({
@@ -119,29 +114,68 @@
 		}
 	});
 
+	var Heading=React.createClass({
+		render:function(){
+			var cat="ss";
+			switch(sessionStorage.category){
+				case "1":
+					cat="Furniture Ads";
+					break;
+				case "2":
+					cat="Mobile Ads";
+					break;
+				case "3":
+					cat="Appliances Ads";
+					break;
+				case "4":
+					cat="Car Ads";
+					break;
+				case "5":
+					cat="Bikes Ads";
+					break;
+				case "6":
+					cat="Pet Ads";
+					break;
+				case "7":
+					cat="Hobbies Ads";
+					break;
+				case "8":
+					cat="Fashion Ads";
+					break;
+				case "9":
+					cat="Property Ads";
+					break;
+				case "10":
+					cat="Jobs Ads";
+					break;
+			}
+			var st={textAlign:'center'};
+			return(<h3 className="text-info" style={st}>{cat}</h3>);
+		}
+	});
+
 	//console.log("category:"+sessionStorage.category);
 	var Ads = React.createClass({
 		render:function(){
 			var adsArray=[];
 			var request = new XMLHttpRequest();
-			request.open("POST","category.php?",false);
+			request.open("POST","category.php",false);
 			request.onload=function(){
-				//console.log(request.responseText);
+				console.log(request.responseText);
 				var jso = JSON.parse(request.responseText);
 				for(var i = 0 ; i < jso.length ;i++){
 				if(jso[i].image_loc != "")
 					adsArray.push(<Ad title={jso[i].title} link={jso[i].image_loc} price={jso[i].price} name={jso[i].name} number={jso[i].number} email={jso[i].email} desc={jso[i].description} city={jso[i].city} price={jso[i].price}/>);
 				else
-					adsArray.push(<Ad title={jso[i].title} price={jso[i].price} name={jso[i].name} number={jso[i].number} email={jso[i].email} desc={jso[i].description} city={jso[i].city} />);
+					adsArray.push(<Ad title={jso[i].title} price={jso[i].price} name={jso[i].name} number={jso[i].number} email={jso[i].email} desc={jso[i].description} city={jso[i].city} price={jso[i].price}/>);
 				}
 			};
 			request.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 			request.send("category="+sessionStorage.category);
 			
-
 			return(
 				<div>
-					<h3 className="text-info" style={st}>{cat}</h3>
+					<Heading />
 					<div className="row">{adsArray}</div>
 				</div>
 				);
@@ -265,10 +299,7 @@
 	});
 
 	ReactDOM.render(<Header />,document.getElementById("header"));
-	ReactDOM.render(<Ad title="Classified 1" price="200" name="Noor ul Haq" number="1234567" email="foo@bar.com" desc="Description is not required" city="Karachi" />,document.getElementById("ads"));
-	ReactDOM.render(<Ad title="Classified 2" price="20000" name="Noor ul Haq" number="1234567" email="coo@bar.com" desc="Description is not required" link="https://www.google.com/mobile/play/images/p1.jpg" city="Lahore" />,document.getElementById("ads1"));
-	ReactDOM.render(<Ad title="Classified 3" price="2030" name="Noor ul Haq" number="1234567" email="goo@bar.com" desc="Description is not required" link="https://autoworld.files.wordpress.com/2010/01/peugeot-sr1-concept-car-img_1.jpg" city="Karachi" />,document.getElementById("ads2"));
-	ReactDOM.render(<Ad title="Classified 4" price="100" name="Noor ul Haq" number="1234567" email="poo@bar.com" desc="Description is not required" link="http://i3.ypcdn.com/blob/2edf51f656a009a177211ac175377d0890dd70f1" city="Karachi" />,document.getElementById("ads3"));
+	ReactDOM.render(<Ads />,document.getElementById("ads"));
 	ReactDOM.render(<Modal />,document.getElementById("theMod"));
 </script>
 </body>
